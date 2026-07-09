@@ -160,10 +160,6 @@
     font-size:clamp(3rem,8.5vw,5.8rem);line-height:1;letter-spacing:.01em;
     color:#f5f7ff;
   }
-  .cosmos .role{
-    font-family:var(--font-mono);font-size:.8rem;letter-spacing:.42em;
-    text-transform:uppercase;color:#93a6d8;margin-top:22px;text-indent:.42em;
-  }
   .cosmos-cta{margin-top:42px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
   .cosmos-cta .pill{background:rgba(255,255,255,.06);border-color:rgba(139,183,255,.3);color:#eef2ff;backdrop-filter:blur(6px)}
   .cosmos-cta .pill.primary{background:#eef2ff;color:#0a1430;border-color:#eef2ff}
@@ -242,7 +238,7 @@
 
   /* ---------- pílulas ---------- */
   .pill{
-    display:inline-flex;align-items:center;gap:9px;
+    display:inline-flex;align-items:center;gap:9px;white-space:nowrap;
     border-radius:999px;padding:13px 26px;font-weight:600;font-size:.92rem;
     border:1px solid var(--line);background:var(--surface);color:var(--text);
     transition:transform .18s,box-shadow .18s,border-color .18s;
@@ -448,8 +444,9 @@
       <a href="#contato">Contact</a>
     </div>
     <div class="nav-right">
+      <button class="theme-toggle" id="lang-toggle" aria-label="Trocar idioma / switch language">🇧🇷</button>
       <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema claro/escuro">☀</button>
-      <a class="pill primary" style="padding:10px 22px" href="#contato">Fale comigo</a>
+      <a class="pill primary" style="padding:10px 22px" href="#contato" data-i18n="cta-talk">Fale comigo</a>
     </div>
   </nav>
 </div>
@@ -462,9 +459,8 @@
     <div class="cosmos-inner">
       <p class="kicker">AI Engineer</p>
       <h1>Lucas Padilha</h1>
-      <p class="role">Mobile · Web · O que precisar</p>
       <div class="cosmos-cta">
-        <a class="pill primary" href="#contato">Fale comigo</a>
+        <a class="pill primary" href="#contato" data-i18n="cta-talk">Fale comigo</a>
         <a class="pill" href="https://github.com/lhadipa" target="_blank" rel="noopener">★ GitHub</a>
         <a class="pill" href="https://www.linkedin.com/in/lucas-padilha-27503596/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
@@ -476,10 +472,9 @@
     <div class="wrap">
       <!-- faixa de features -->
       <div class="features">
-        <span class="feature"><span class="ic">✦</span> AI Engineering: LLMs e agentes</span>
-        <span class="feature"><span class="ic">📱</span> Mobile-first com React Native</span>
-        <span class="feature"><span class="ic">⌨</span> Web com React e TypeScript</span>
-        <span class="feature"><span class="ic">🔧</span> Generalista: o que precisar, eu construo</span>
+        <span class="feature"><span class="ic">✦</span> <span data-i18n="feat-ai">AI Engineering: LLMs e agentes</span></span>
+        <span class="feature"><span class="ic">📱</span> <span data-i18n="feat-mobile">Mobile-first com React Native</span></span>
+        <span class="feature"><span class="ic">⌨</span> <span data-i18n="feat-web">Web com React e TypeScript</span></span>
       </div>
 
       <!-- terminal -->
@@ -498,29 +493,29 @@
   <div class="wrap">
     <!-- stats -->
     <div class="stats-row">
-      <div class="stat reveal"><b>10<em>+</em></b><span>anos de código</span></div>
-      <div class="stat reveal"><b>19</b><span>repositórios públicos</span></div>
-      <div class="stat reveal"><b>2015</b><span>no GitHub desde</span></div>
+      <div class="stat reveal"><b>10<em>+</em></b><span data-i18n="stat-years">anos de código</span></div>
+      <div class="stat reveal"><b>19</b><span data-i18n="stat-repos">repositórios públicos</span></div>
+      <div class="stat reveal"><b>2015</b><span data-i18n="stat-since">no GitHub desde</span></div>
     </div>
 
     <!-- SOBRE -->
     <section id="sobre">
       <div class="sec-head">
-        <p class="kicker">sobre</p>
-        <h2>Produto primeiro, código depois</h2>
+        <p class="kicker" data-i18n="about-kicker">sobre</p>
+        <h2 data-i18n="about-h2">Produto primeiro, código depois</h2>
       </div>
       <div class="cards">
         <div class="card span-3 reveal">
-          <h3>Quem sou</h3>
-          <p>Engenheiro de software apaixonado por produto. Hoje meu foco é <strong>AI Engineering</strong> — LLMs, agentes e automação — somado a uma base sólida em <strong>mobile e web</strong>: React Native, React e TypeScript em produção.</p>
-          <p>Mas não me prendo a rótulo: backend, infra, integração, protótipo — entendo o problema primeiro e construo o que ele pedir, com o mínimo de código que resolve bem.</p>
+          <h3 data-i18n="who-h3">Quem sou</h3>
+          <p data-i18n-html="who-p1">Engenheiro de software apaixonado por produto. Hoje meu foco é <strong>AI Engineering</strong> — LLMs, agentes e automação — somado a uma base sólida em <strong>mobile e web</strong>: React Native, React e TypeScript em produção.</p>
+          <p data-i18n="who-p2">Mas não me prendo a rótulo: backend, infra, integração, protótipo — entendo o problema primeiro e construo o que ele pedir, com o mínimo de código que resolve bem.</p>
         </div>
         <div class="card span-3 reveal">
-          <h3>Agora</h3>
+          <h3 data-i18n="now-h3">Agora</h3>
           <ul class="now">
-            <li>Construindo produtos com LLMs e agentes de IA</li>
-            <li>Apps mobile com React Native, do protótipo à loja</li>
-            <li>Aberto a qualquer desafio que envolva código</li>
+            <li data-i18n="now-1">Construindo produtos com LLMs e agentes de IA</li>
+            <li data-i18n="now-2">Apps mobile com React Native, do protótipo à loja</li>
+            <li data-i18n="now-3">Aberto a qualquer desafio que envolva código</li>
           </ul>
         </div>
         <div class="card span-6 reveal" id="stack">
@@ -546,8 +541,8 @@
 
     <!-- CONTATO -->
     <section class="contact" id="contato">
-      <h2>Vamos construir algo<em>?</em></h2>
-      <p>Estou sempre aberto a boas conversas sobre produto, mobile e o futuro do desenvolvimento. O jeito mais rápido de me encontrar:</p>
+      <h2 data-i18n-html="contact-h2">Vamos construir algo<em>?</em></h2>
+      <p data-i18n="contact-p">Estou sempre aberto a boas conversas sobre produto, mobile e o futuro do desenvolvimento. O jeito mais rápido de me encontrar:</p>
       <div class="contact-cta">
         <a class="pill primary" href="mailto:padilhamed@gmail.com">padilhamed@gmail.com</a>
         <a class="pill" href="https://wa.me/5511951734241" target="_blank" rel="noopener">WhatsApp · +55 11 95173-4241</a>
@@ -564,7 +559,7 @@
   <footer>
     <div class="wrap">
       <span>© 2026 Lucas Padilha</span>
-      <span>feito em São Paulo · <span class="ok">exit 0</span></span>
+      <span><span data-i18n="footer-made">feito em São Paulo</span> · <span class="ok">exit 0</span></span>
     </div>
   </footer>
 </main>
@@ -584,20 +579,79 @@
     applyTheme(next);
   });
 
+  // idiomas: pt/en — auto pelo navegador, bandeirinha força
+  const I18N = {
+    pt: {
+      'cta-talk':'Fale comigo',
+      'feat-ai':'AI Engineering: LLMs e agentes',
+      'feat-mobile':'Mobile-first com React Native',
+      'feat-web':'Web com React e TypeScript',
+      'stat-years':'anos de código',
+      'stat-repos':'repositórios públicos',
+      'stat-since':'no GitHub desde',
+      'about-kicker':'sobre',
+      'about-h2':'Produto primeiro, código depois',
+      'who-h3':'Quem sou',
+      'who-p1':'Engenheiro de software apaixonado por produto. Hoje meu foco é <strong>AI Engineering</strong> — LLMs, agentes e automação — somado a uma base sólida em <strong>mobile e web</strong>: React Native, React e TypeScript em produção.',
+      'who-p2':'Mas não me prendo a rótulo: backend, infra, integração, protótipo — entendo o problema primeiro e construo o que ele pedir, com o mínimo de código que resolve bem.',
+      'now-h3':'Agora',
+      'now-1':'Construindo produtos com LLMs e agentes de IA',
+      'now-2':'Apps mobile com React Native, do protótipo à loja',
+      'now-3':'Aberto a qualquer desafio que envolva código',
+      'contact-h2':'Vamos construir algo<em>?</em>',
+      'contact-p':'Estou sempre aberto a boas conversas sobre produto, mobile e o futuro do desenvolvimento. O jeito mais rápido de me encontrar:',
+      'footer-made':'feito em São Paulo',
+      'term-status':'aberto a novas ideias',
+      'term-dim':'# desde 2015 no GitHub · github.com/lhadipa'
+    },
+    en: {
+      'cta-talk':"Let's talk",
+      'feat-ai':'AI Engineering: LLMs and agents',
+      'feat-mobile':'Mobile-first with React Native',
+      'feat-web':'Web with React and TypeScript',
+      'stat-years':'years of code',
+      'stat-repos':'public repositories',
+      'stat-since':'on GitHub since',
+      'about-kicker':'about',
+      'about-h2':'Product first, code second',
+      'who-h3':'Who I am',
+      'who-p1':'Software engineer with a passion for product. My focus today is <strong>AI Engineering</strong> — LLMs, agents and automation — on top of a solid <strong>mobile and web</strong> foundation: React Native, React and TypeScript in production.',
+      'who-p2':"I don't stick to labels though: backend, infra, integrations, prototypes — I understand the problem first and build whatever it calls for, with the least code that solves it well.",
+      'now-h3':'Now',
+      'now-1':'Building products with LLMs and AI agents',
+      'now-2':'Mobile apps with React Native, from prototype to store',
+      'now-3':'Open to any challenge that involves code',
+      'contact-h2':"Let's build something<em>?</em>",
+      'contact-p':"I'm always up for good conversations about product, mobile and the future of software. The fastest way to reach me:",
+      'footer-made':'made in São Paulo',
+      'term-status':'open to new ideas',
+      'term-dim':'# on GitHub since 2015 · github.com/lhadipa'
+    }
+  };
+  const langToggle = document.getElementById('lang-toggle');
+  let lang = localStorage.getItem('lang') ||
+    ((navigator.language || 'en').toLowerCase().startsWith('pt') ? 'pt' : 'en');
+
   // terminal digitando `whoami`
-  const lines = [
-    {html:'<span class="prompt">➜</span> <span class="cmd">whoami --verbose</span>', type:true},
-    {html:'<span class="key">name</span>: <span class="str">"Lucas Padilha"</span>'},
-    {html:'<span class="key">role</span>: <span class="str">"AI Engineer · Mobile · Web"</span>'},
-    {html:'<span class="key">base</span>: <span class="str">"São Paulo, BR"</span>'},
-    {html:'<span class="key">stack</span>: [<span class="str">"llm-agents"</span>, <span class="str">"react-native"</span>, <span class="str">"react"</span>, <span class="str">"typescript"</span>]'},
-    {html:'<span class="key">status</span>: <span class="str">"aberto a novas ideias"</span>'},
-    {html:'<span class="dim"># desde 2015 no GitHub · github.com/lhadipa</span>'},
-  ];
   const body = document.getElementById('term-body');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const term = {gen:0};
 
-  function render(i){
+  function termLines(){
+    const t = I18N[lang];
+    return [
+      {html:'<span class="prompt">➜</span> <span class="cmd">whoami --verbose</span>', type:true},
+      {html:'<span class="key">name</span>: <span class="str">"Lucas Padilha"</span>'},
+      {html:'<span class="key">role</span>: <span class="str">"AI Engineer · Mobile · Web"</span>'},
+      {html:'<span class="key">base</span>: <span class="str">"São Paulo, BR"</span>'},
+      {html:'<span class="key">stack</span>: [<span class="str">"llm-agents"</span>, <span class="str">"react-native"</span>, <span class="str">"react"</span>, <span class="str">"typescript"</span>]'},
+      {html:'<span class="key">status</span>: <span class="str">"'+t['term-status']+'"</span>'},
+      {html:'<span class="dim">'+t['term-dim']+'</span>'},
+    ];
+  }
+
+  function render(i, gen, lines){
+    if(gen !== term.gen) return;
     if(i >= lines.length){
       const p = document.createElement('div');
       p.className = 'term-line';
@@ -614,20 +668,41 @@
       div.innerHTML = '<span class="prompt">➜</span> <span class="cmd"></span><span class="cursor"></span>';
       const cmd = div.querySelector('.cmd');
       const t = setInterval(()=>{
+        if(gen !== term.gen){ clearInterval(t); return; }
         cmd.textContent = plain.slice(0, ++j);
         if(j >= plain.length){
           clearInterval(t);
           div.querySelector('.cursor').remove();
-          setTimeout(()=>render(i+1), 280);
+          setTimeout(()=>render(i+1, gen, lines), 280);
         }
       }, 55);
     }else{
       div.innerHTML = lines[i].html;
-      if(reduced){ render(i+1); }
-      else{ setTimeout(()=>render(i+1), 170); }
+      if(reduced){ render(i+1, gen, lines); }
+      else{ setTimeout(()=>render(i+1, gen, lines), 170); }
     }
   }
-  render(0);
+
+  function applyLang(){
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    langToggle.textContent = lang === 'pt' ? '🇧🇷' : '🇺🇸';
+    const t = I18N[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const k = el.getAttribute('data-i18n'); if(t[k]) el.textContent = t[k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+      const k = el.getAttribute('data-i18n-html'); if(t[k]) el.innerHTML = t[k];
+    });
+    term.gen++;
+    body.innerHTML = '';
+    render(0, term.gen, termLines());
+  }
+  applyLang();
+  langToggle.addEventListener('click', ()=>{
+    lang = lang === 'pt' ? 'en' : 'pt';
+    localStorage.setItem('lang', lang);
+    applyLang();
+  });
 
   // sol que segue o mouse (tema claro)
   (function(){
