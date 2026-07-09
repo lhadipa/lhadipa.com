@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://lhadipa.com/assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Lucas Padilha de braços abertos ao pôr do sol">
+<meta property="og:image:alt" content="Monograma LP — Lucas Padilha, AI, Mobile & Web Engineer">
 <meta property="og:locale" content="pt_BR">
 <!-- compartilhamento: twitter/x -->
 <meta name="twitter:card" content="summary_large_image">
@@ -152,9 +152,13 @@
   #dust-back{z-index:1}
   .cosmos-inner{position:relative;z-index:3}
   .avatar{
-    width:min(330px,62vw);height:min(330px,62vw);border-radius:50%;
-    object-fit:cover;object-position:50% 38%;display:block;margin:0 auto;
+    width:min(240px,52vw);height:min(240px,52vw);border-radius:50%;
+    margin:0 auto;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 38% 32%, #16264d, #0a1430 60%, #060d22);
     box-shadow:0 0 0 1px rgba(139,183,255,.25), 0 0 90px rgba(59,108,204,.4);
+    font-family:var(--font-display);font-weight:700;
+    font-size:clamp(3.4rem,10vw,5rem);color:#ffb454;letter-spacing:-.03em;
+    text-shadow:0 0 40px rgba(255,180,84,.35);user-select:none;
   }
   .cosmos .kicker{
     font-family:var(--font-mono);font-size:.74rem;letter-spacing:.5em;
@@ -448,9 +452,9 @@
   <nav class="bar" aria-label="principal">
     <a class="logo" href="#"><b>lucas</b>@padilha:~$</a>
     <div class="nav-links">
-      <a href="#sobre">Sobre</a>
-      <a href="#stack">Stack</a>
-      <a href="#contato">Contato</a>
+      <a href="#sobre">About</a>
+      <a href="#stack">Work</a>
+      <a href="#contato">Contact</a>
     </div>
     <div class="nav-right">
       <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema claro/escuro">☀</button>
@@ -465,7 +469,7 @@
     <canvas id="dust-back" aria-hidden="true"></canvas>
     <canvas id="dust-front" aria-hidden="true"></canvas>
     <div class="cosmos-inner">
-      <img class="avatar" src="assets/lucas.jpg" alt="Lucas Padilha ao ar livre, de braços abertos ao pôr do sol">
+      <div class="avatar" aria-hidden="true">LP</div>
       <p class="kicker">AI Engineer</p>
       <h1>Lucas Padilha</h1>
       <p class="role">Mobile · Web · O que precisar</p>
