@@ -7,184 +7,296 @@
 <meta name="description" content="Lucas Padilha, Software Engineer em São Paulo. React Native, React e o ecossistema JavaScript.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@300;400;500&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* dracula */
-    --bg:#282a36;
-    --panel:#21222c;
-    --panel-2:#191a21;
-    --line:#44475a;
-    --text:#f8f8f2;
-    --muted:#8b93b8;
-    --comment:#6272a4;
-    --pink:#ff79c6;
-    --purple:#bd93f9;
-    --pink-dim:rgba(255,121,198,.12);
-    --cyan:#8be9fd;
-    --green:#50fa7b;
-    --radius:14px;
-    --font-display:"Syne",sans-serif;
-    --font-body:"Sora",sans-serif;
+    /* claro — canvas open-design */
+    --bg:#fafafa;
+    --surface:#ffffff;
+    --text:#262626;
+    --muted:#6f6f6f;
+    --line:#e5e5e5;
+    --grid:rgba(38,38,38,.05);
+    --accent:#3fe000;          /* alças e caixa de seleção */
+    --accent-text:#1daa00;     /* verde legível p/ texto */
+    --pill:#171717;            /* pílula primária */
+    --pill-text:#ffffff;
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+    --cursor-a:#8be9fd;
+    --cursor-b:#bd93f9;
+    --radius:18px;
+    --font-body:"Albert Sans",sans-serif;
+    --font-display:"Source Serif 4",serif;
     --font-mono:"JetBrains Mono",monospace;
   }
+  [data-theme="dark"]{
+    /* escuro — dracula */
+    --bg:#282a36;
+    --surface:#21222c;
+    --text:#f8f8f2;
+    --muted:#8b93b8;
+    --line:#44475a;
+    --grid:rgba(248,248,242,.045);
+    --accent:#ff79c6;
+    --accent-text:#ff79c6;
+    --pill:#ff79c6;
+    --pill-text:#282a36;
+    --shadow:0 10px 30px rgba(0,0,0,.4);
+    --cursor-a:#8be9fd;
+    --cursor-b:#50fa7b;
+  }
+
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
     background:var(--bg);
     color:var(--text);
     font-family:var(--font-body);
-    font-weight:300;
     line-height:1.65;
     -webkit-font-smoothing:antialiased;
-    /* grain sutil */
-    background-image:radial-gradient(rgba(255,255,255,.015) 1px, transparent 1px);
-    background-size:3px 3px;
+    transition:background .25s,color .25s;
   }
   a{color:inherit;text-decoration:none}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--pink);outline-offset:3px;border-radius:4px}
-  ::selection{background:var(--pink);color:#282a36}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+  ::selection{background:var(--accent);color:var(--bg)}
 
-  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
-  /* ---------- nav ---------- */
-  header{
-    position:sticky;top:0;z-index:10;
-    backdrop-filter:blur(12px);
-    background:rgba(40,42,54,.72);
-    border-bottom:1px solid var(--line);
+  /* ---------- canvas: grid + artefatos ---------- */
+  .canvas{
+    position:relative;overflow:hidden;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:72px 72px;
   }
-  nav{display:flex;align-items:center;justify-content:space-between;height:60px}
-  .logo{font-family:var(--font-mono);font-size:.95rem;color:var(--muted)}
-  .logo b{color:var(--pink);font-weight:500}
-  .nav-links{display:flex;gap:26px;font-family:var(--font-mono);font-size:.8rem}
+  .spiral{
+    position:absolute;right:-60px;top:90px;width:420px;opacity:.5;
+    pointer-events:none;color:var(--line);
+  }
+  @media (max-width:900px){.spiral{display:none}}
+
+  /* cursores multiplayer estilo figma */
+  .fcursor{
+    position:absolute;pointer-events:none;z-index:3;
+    animation:floaty 7s ease-in-out infinite;
+  }
+  .fcursor svg{display:block}
+  .fcursor .tagname{
+    font-family:var(--font-mono);font-size:.68rem;color:#101010;
+    padding:3px 9px;border-radius:999px;margin:2px 0 0 14px;display:inline-block;
+  }
+  .fcursor.a{left:9%;top:170px}
+  .fcursor.b{right:14%;bottom:120px;animation-delay:-3.5s}
+  .fcursor.a .tagname{background:var(--cursor-a)}
+  .fcursor.b .tagname{background:var(--cursor-b)}
+  .fcursor.a svg path{fill:var(--cursor-a)}
+  .fcursor.b svg path{fill:var(--cursor-b)}
+  @keyframes floaty{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(14px,-18px)}
+  }
+  @media (max-width:700px){.fcursor{display:none}}
+
+  /* ---------- nav flutuante ---------- */
+  .navbar{
+    position:sticky;top:14px;z-index:20;
+  }
+  .navbar .bar{
+    display:flex;align-items:center;justify-content:space-between;
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:999px;box-shadow:var(--shadow);
+    padding:10px 12px 10px 22px;
+    max-width:1080px;margin:0 auto;
+  }
+  .logo{font-family:var(--font-mono);font-size:.88rem;color:var(--muted)}
+  .logo b{color:var(--accent-text);font-weight:500}
+  .nav-links{display:flex;gap:24px;font-size:.88rem;font-weight:500}
   .nav-links a{color:var(--muted);transition:color .18s}
-  .nav-links a:hover{color:var(--pink)}
+  .nav-links a:hover{color:var(--text)}
+  .nav-right{display:flex;align-items:center;gap:10px}
+  .theme-toggle{
+    width:38px;height:38px;border-radius:50%;border:1px solid var(--line);
+    background:var(--surface);cursor:pointer;font-size:1rem;line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .18s,border-color .18s;
+  }
+  .theme-toggle:hover{transform:rotate(15deg);border-color:var(--accent)}
+  @media (max-width:700px){.nav-links{display:none}}
+
+  /* ---------- pílulas ---------- */
+  .pill{
+    display:inline-flex;align-items:center;gap:9px;
+    border-radius:999px;padding:13px 26px;font-weight:600;font-size:.92rem;
+    border:1px solid var(--line);background:var(--surface);color:var(--text);
+    transition:transform .18s,box-shadow .18s,border-color .18s;
+  }
+  .pill:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .pill.primary{background:var(--pill);color:var(--pill-text);border-color:var(--pill)}
+  .pill .hint{font-weight:400;opacity:.55;font-size:.82rem}
 
   /* ---------- hero ---------- */
-  .hero{padding:88px 0 72px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .hero{text-align:center;padding:110px 0 40px;position:relative;z-index:2}
   .eyebrow{
-    font-family:var(--font-mono);font-size:.78rem;color:var(--cyan);
-    display:flex;align-items:center;gap:10px;margin-bottom:22px;
+    font-family:var(--font-mono);font-size:.78rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--accent-text);font-weight:500;
+    margin-bottom:38px;
   }
-  .eyebrow::before{content:"";width:26px;height:1px;background:var(--cyan)}
-  h1{
-    font-family:var(--font-display);font-weight:800;
-    font-size:clamp(2.6rem,6vw,4.2rem);
-    line-height:1.02;letter-spacing:-.02em;margin-bottom:22px;
+  /* caixa de seleção estilo figma */
+  .selection{
+    position:relative;display:inline-block;
+    border:1.5px solid var(--accent);
+    padding:30px 54px 36px;
   }
-  h1 .accent{color:var(--pink)}
-  .hero p{max-width:44ch;color:var(--muted);font-size:1.05rem}
-  .hero-cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
-  .btn{
-    font-family:var(--font-mono);font-size:.82rem;padding:12px 20px;
-    border-radius:8px;border:1px solid var(--line);color:var(--text);
-    transition:border-color .18s,background .18s,transform .18s;
-    display:inline-flex;align-items:center;gap:8px;
+  .selection .handle{
+    position:absolute;width:10px;height:10px;background:var(--accent);
+    border:1.5px solid var(--bg);
   }
-  .btn:hover{border-color:var(--pink);transform:translateY(-1px)}
-  .btn.primary{background:var(--pink);color:#282a36;border-color:var(--pink);font-weight:500}
-  .btn.primary:hover{background:#ff92d0}
+  .handle.tl{top:-6px;left:-6px}.handle.tr{top:-6px;right:-6px}
+  .handle.bl{bottom:-6px;left:-6px}.handle.br{bottom:-6px;right:-6px}
+  .selection .seltag{
+    position:absolute;top:-30px;left:-1.5px;
+    font-family:var(--font-mono);font-size:.66rem;font-weight:500;
+    background:var(--accent);color:#101010;padding:2px 8px;border-radius:4px;
+  }
+  [data-theme="dark"] .selection .seltag{color:#282a36}
+  .selection .seldim{
+    position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);
+    font-family:var(--font-mono);font-size:.66rem;color:var(--bg);
+    background:var(--accent);padding:2px 8px;border-radius:4px;white-space:nowrap;
+  }
+  .hero h1{
+    font-family:var(--font-display);font-weight:700;
+    font-size:clamp(3rem,8vw,5.4rem);line-height:1.02;letter-spacing:-.01em;
+  }
+  .hero .sub{
+    font-weight:700;font-size:clamp(1.25rem,3vw,2rem);margin-top:6px;
+    letter-spacing:-.01em;
+  }
+  .hero .desc{
+    max-width:60ch;margin:64px auto 0;color:var(--muted);font-size:1.06rem;
+  }
+  .hero .desc strong{color:var(--text);font-weight:600}
+  .hero-cta{margin-top:36px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
 
-  /* ---------- terminal ---------- */
+  /* ---------- feature pills (faixa) ---------- */
+  .features{
+    display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
+    padding:46px 0 10px;position:relative;z-index:2;
+  }
+  .feature{
+    display:flex;align-items:center;gap:9px;
+    background:var(--surface);border:1px solid var(--line);border-radius:999px;
+    padding:11px 20px;font-size:.88rem;font-weight:500;color:var(--muted);
+    box-shadow:var(--shadow);
+  }
+  .feature .ic{color:var(--accent-text)}
+
+  /* ---------- terminal (screenshot do "produto") ---------- */
+  .term-stage{padding:52px 0 30px;position:relative;z-index:2}
   .term{
-    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-    box-shadow:0 24px 60px rgba(0,0,0,.45);
+    max-width:720px;margin:0 auto;
+    background:#21222c;border:1px solid #44475a;border-radius:16px;
+    box-shadow:0 30px 80px rgba(0,0,0,.25);
     font-family:var(--font-mono);font-size:.83rem;overflow:hidden;
+    color:#f8f8f2;
   }
   .term-bar{
     display:flex;align-items:center;gap:8px;padding:12px 16px;
-    border-bottom:1px solid var(--line);background:var(--panel-2);
+    border-bottom:1px solid #44475a;background:#191a21;
   }
   .dot{width:11px;height:11px;border-radius:50%}
   .dot:nth-child(1){background:#ff5f57}.dot:nth-child(2){background:#febc2e}.dot:nth-child(3){background:#28c840}
-  .term-title{margin-left:auto;color:var(--muted);font-size:.72rem}
-  .term-body{padding:20px;min-height:236px}
-  .term-body .prompt{color:var(--green)}
-  .term-body .cmd{color:var(--text)}
-  .term-body .key{color:var(--cyan)}
-  .term-body .str{color:var(--pink)}
-  .term-body .dim{color:var(--muted)}
+  .term-title{margin-left:auto;color:#6272a4;font-size:.72rem}
+  .term-body{padding:20px;min-height:224px}
+  .term-body .prompt{color:#50fa7b}
+  .term-body .cmd{color:#f8f8f2}
+  .term-body .key{color:#8be9fd}
+  .term-body .str{color:#ff79c6}
+  .term-body .dim{color:#6272a4}
   .term-line{white-space:pre-wrap}
   .cursor{
-    display:inline-block;width:8px;height:1.05em;background:var(--pink);
+    display:inline-block;width:8px;height:1.05em;background:#ff79c6;
     vertical-align:text-bottom;animation:blink 1s steps(1) infinite;
   }
   @keyframes blink{50%{opacity:0}}
 
-  /* ---------- sections ---------- */
-  section{padding:64px 0}
-  .sec-label{
-    font-family:var(--font-mono);font-size:.78rem;color:var(--pink);
-    margin-bottom:34px;display:flex;align-items:center;gap:12px;
+  /* ---------- stats ---------- */
+  .stats-row{
+    display:flex;justify-content:center;gap:72px;flex-wrap:wrap;
+    padding:64px 0;text-align:center;
   }
-  .sec-label::after{content:"";flex:1;height:1px;background:var(--line)}
-
-  /* ---------- bento ---------- */
-  .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
-  .card{
-    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-    padding:26px;transition:border-color .2s,transform .2s;
-  }
-  .card:hover{border-color:#6272a4;transform:translateY(-2px)}
-  .card h3{
-    font-family:var(--font-mono);font-weight:500;font-size:.78rem;
-    color:var(--muted);text-transform:lowercase;margin-bottom:16px;
-  }
-  .card h3::before{content:"// ";color:var(--pink)}
-  .span-3{grid-column:span 3}
-  .span-2{grid-column:span 2}
-  .span-4{grid-column:span 4}
-
-  .about-card p{color:var(--muted);font-size:.95rem}
-  .about-card p+p{margin-top:12px}
-  .about-card em{color:var(--text);font-style:normal}
-
-  .stats{display:flex;gap:28px;flex-wrap:wrap}
   .stat b{
-    font-family:var(--font-display);font-weight:700;font-size:1.9rem;
-    color:var(--text);display:block;line-height:1.1;
+    font-family:var(--font-display);font-weight:700;font-size:3rem;
+    display:block;line-height:1.1;
   }
-  .stat span{font-family:var(--font-mono);font-size:.72rem;color:var(--muted)}
+  .stat b em{color:var(--accent-text);font-style:normal}
+  .stat span{font-size:.88rem;color:var(--muted)}
+
+  /* ---------- seções ---------- */
+  section{padding:72px 0}
+  .sec-head{text-align:center;margin-bottom:44px}
+  .sec-head .kicker{
+    font-family:var(--font-mono);font-size:.74rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--accent-text);font-weight:500;
+  }
+  .sec-head h2{
+    font-family:var(--font-display);font-weight:700;
+    font-size:clamp(1.9rem,4.5vw,2.9rem);letter-spacing:-.01em;margin-top:10px;
+  }
+
+  .cards{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px;transition:transform .2s,box-shadow .2s;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .card h3{font-weight:700;font-size:1.05rem;margin-bottom:14px}
+  .span-3{grid-column:span 3}
+  .span-6{grid-column:span 6}
+  .card p{color:var(--muted);font-size:.95rem}
+  .card p+p{margin-top:12px}
+  .card p strong{color:var(--text);font-weight:600}
 
   .tags{display:flex;flex-wrap:wrap;gap:9px}
   .tag{
-    font-family:var(--font-mono);font-size:.76rem;padding:7px 13px;
+    font-family:var(--font-mono);font-size:.78rem;padding:8px 15px;
     border-radius:999px;border:1px solid var(--line);color:var(--muted);
     transition:color .18s,border-color .18s;
   }
-  .tag:hover{color:var(--pink);border-color:var(--pink)}
-  .tag.hot{color:var(--pink);border-color:rgba(255,121,198,.4);background:var(--pink-dim)}
+  .tag:hover{color:var(--accent-text);border-color:var(--accent-text)}
+  .tag.hot{
+    color:var(--accent-text);border-color:var(--accent-text);
+    background:color-mix(in srgb, var(--accent) 10%, transparent);
+  }
 
   .now li{
-    list-style:none;color:var(--muted);font-size:.92rem;
-    padding-left:20px;position:relative;margin-bottom:10px;
+    list-style:none;color:var(--muted);font-size:.95rem;
+    padding-left:22px;position:relative;margin-bottom:10px;
   }
-  .now li::before{content:"▸";position:absolute;left:0;color:var(--cyan)}
+  .now li::before{content:"▸";position:absolute;left:0;color:var(--accent-text)}
 
   /* ---------- contato ---------- */
-  .contact{text-align:center;padding:96px 0 110px}
+  .contact{text-align:center;padding:100px 0 110px}
   .contact h2{
-    font-family:var(--font-display);font-weight:800;
-    font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.02em;margin-bottom:16px;
+    font-family:var(--font-display);font-weight:700;
+    font-size:clamp(2.2rem,5.5vw,3.6rem);letter-spacing:-.01em;margin-bottom:18px;
   }
-  .contact p{color:var(--muted);max-width:46ch;margin:0 auto 36px}
-  .contact .email{
-    font-family:var(--font-mono);font-size:clamp(.95rem,2.4vw,1.25rem);
-    color:var(--pink);border-bottom:1px dashed rgba(255,121,198,.5);padding-bottom:2px;
-  }
-  .contact .email:hover{border-bottom-style:solid}
-  .socials{margin-top:40px;display:flex;justify-content:center;gap:28px;font-family:var(--font-mono);font-size:.82rem}
+  .contact h2 em{color:var(--accent-text);font-style:normal}
+  .contact p{color:var(--muted);max-width:46ch;margin:0 auto 38px}
+  .contact-cta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+  .socials{margin-top:44px;display:flex;justify-content:center;gap:28px;font-family:var(--font-mono);font-size:.8rem}
   .socials a{color:var(--muted);transition:color .18s}
-  .socials a:hover{color:var(--pink)}
+  .socials a:hover{color:var(--accent-text)}
 
   footer{
     border-top:1px solid var(--line);padding:26px 0;
     font-family:var(--font-mono);font-size:.74rem;color:var(--muted);
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   }
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  footer .ok{color:var(--accent-text)}
 
-  /* ---------- reveal on scroll ---------- */
+  /* ---------- reveal ---------- */
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
   .reveal.in{opacity:1;transform:none}
 
@@ -194,78 +306,124 @@
     html{scroll-behavior:auto}
   }
 
-  /* ---------- responsivo ---------- */
   @media (max-width:860px){
-    .hero{grid-template-columns:1fr;gap:44px;padding:64px 0 48px}
-    .bento{grid-template-columns:1fr 1fr}
-    .span-3,.span-2,.span-4{grid-column:span 2}
-    .nav-links{display:none}
-  }
-  @media (max-width:520px){
-    .bento{grid-template-columns:1fr}
-    .span-3,.span-2,.span-4{grid-column:span 1}
+    .hero{padding:80px 0 30px}
+    .selection{padding:22px 26px 28px}
+    .cards{grid-template-columns:1fr}
+    .span-3,.span-6{grid-column:span 1}
+    .stats-row{gap:40px;padding:48px 0}
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <nav aria-label="principal">
-      <a class="logo" href="#"><b>lucas</b>@padilha:~$</a>
-      <div class="nav-links">
-        <a href="#sobre">sobre</a>
-        <a href="#stack">stack</a>
-        <a href="#contato">contato</a>
-      </div>
-    </nav>
-  </div>
-</header>
+<div class="navbar wrap">
+  <nav class="bar" aria-label="principal">
+    <a class="logo" href="#"><b>lucas</b>@padilha:~$</a>
+    <div class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#stack">Stack</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema claro/escuro">☀</button>
+      <a class="pill primary" style="padding:10px 22px" href="#contato">Fale comigo</a>
+    </div>
+  </nav>
+</div>
 
 <main>
-  <div class="wrap">
+  <div class="canvas">
+    <!-- espiral áurea decorativa -->
+    <svg class="spiral" viewBox="0 0 420 260" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+      <rect x="0" y="0" width="260" height="260"/>
+      <rect x="260" y="0" width="160" height="160"/>
+      <rect x="320" y="160" width="100" height="100"/>
+      <rect x="260" y="160" width="60" height="60"/>
+      <rect x="260" y="220" width="40" height="40"/>
+      <path d="M260 260 A260 260 0 0 0 0 0 M260 0 A160 160 0 0 1 420 160 M420 160 A100 100 0 0 1 320 260 M320 260 A60 60 0 0 1 260 200 M260 200 A40 40 0 0 1 300 240"/>
+    </svg>
 
-    <!-- HERO -->
-    <div class="hero">
-      <div>
-        <p class="eyebrow">São Paulo, Brasil · GMT-3</p>
-        <h1>Lucas<br>Padilha<span class="accent">.</span></h1>
-        <p>Software Engineer com mais de uma década no ecossistema JavaScript — construo apps mobile com <strong style="color:var(--text);font-weight:400">React Native</strong> e interfaces web com React, do protótipo à loja.</p>
-        <div class="hero-cta">
-          <a class="btn primary" href="#contato">Fale comigo →</a>
-          <a class="btn" href="https://github.com/lhadipa" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/lucas-padilha-27503596/" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-      </div>
-
-      <div class="term" aria-hidden="true">
-        <div class="term-bar">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="term-title">lucas@padilha — zsh</span>
-        </div>
-        <div class="term-body" id="term-body"></div>
-      </div>
+    <!-- cursores multiplayer -->
+    <div class="fcursor a" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M4 2l16 8-7 2-3 7z"/></svg>
+      <span class="tagname">recrutador</span>
+    </div>
+    <div class="fcursor b" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M4 2l16 8-7 2-3 7z"/></svg>
+      <span class="tagname">lucas</span>
     </div>
 
-    <!-- SOBRE / BENTO -->
+    <div class="wrap">
+      <!-- HERO -->
+      <div class="hero">
+        <p class="eyebrow">Software Engineer · São Paulo, Brasil · GMT-3</p>
+        <div class="selection">
+          <span class="handle tl"></span><span class="handle tr"></span>
+          <span class="handle bl"></span><span class="handle br"></span>
+          <span class="seltag">H1 · lucas</span>
+          <h1>Lucas Padilha</h1>
+          <p class="sub">Mobile &amp; Web Engineer</p>
+          <span class="seldim">720 × 168</span>
+        </div>
+        <p class="desc">Mais de uma década no ecossistema JavaScript: construo apps mobile com <strong>React Native</strong> e interfaces web com <strong>React</strong>, do protótipo à loja — com IA no fluxo de trabalho.</p>
+        <div class="hero-cta">
+          <a class="pill primary" href="#contato">Fale comigo <span class="hint">· resposta rápida</span></a>
+          <a class="pill" href="https://github.com/lhadipa" target="_blank" rel="noopener">★ GitHub</a>
+          <a class="pill" href="https://www.linkedin.com/in/lucas-padilha-27503596/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+
+      <!-- faixa de features -->
+      <div class="features">
+        <span class="feature"><span class="ic">📱</span> Mobile-first com React Native</span>
+        <span class="feature"><span class="ic">⌨</span> TypeScript de ponta a ponta</span>
+        <span class="feature"><span class="ic">✦</span> IA no fluxo de desenvolvimento</span>
+      </div>
+
+      <!-- terminal -->
+      <div class="term-stage">
+        <div class="term" aria-hidden="true">
+          <div class="term-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="term-title">lucas@padilha — zsh</span>
+          </div>
+          <div class="term-body" id="term-body"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- stats -->
+    <div class="stats-row">
+      <div class="stat reveal"><b>10<em>+</em></b><span>anos de código</span></div>
+      <div class="stat reveal"><b>19</b><span>repositórios públicos</span></div>
+      <div class="stat reveal"><b>2015</b><span>no GitHub desde</span></div>
+    </div>
+
+    <!-- SOBRE -->
     <section id="sobre">
-      <p class="sec-label">sobre</p>
-      <div class="bento">
-        <div class="card about-card span-4 reveal">
-          <h3>quem sou</h3>
-          <p>Engenheiro de software apaixonado por produto. A maior parte do meu trabalho vive na fronteira entre <em>mobile e web</em>: React Native, React, TypeScript e as ferramentas que fazem tudo isso chegar em produção com qualidade.</p>
+      <div class="sec-head">
+        <p class="kicker">sobre</p>
+        <h2>Produto primeiro, código depois</h2>
+      </div>
+      <div class="cards">
+        <div class="card span-3 reveal">
+          <h3>Quem sou</h3>
+          <p>Engenheiro de software apaixonado por produto. A maior parte do meu trabalho vive na fronteira entre <strong>mobile e web</strong>: React Native, React, TypeScript e as ferramentas que fazem tudo isso chegar em produção com qualidade.</p>
           <p>Curto entender o problema antes de escrever código — e escrever o mínimo de código que resolve bem.</p>
         </div>
-        <div class="card span-2 reveal">
-          <h3>github em números</h3>
-          <div class="stats">
-            <div class="stat"><b>19</b><span>repositórios</span></div>
-            <div class="stat"><b>10+</b><span>anos de código</span></div>
-            <div class="stat"><b>25</b><span>followers</span></div>
-          </div>
+        <div class="card span-3 reveal">
+          <h3>Agora</h3>
+          <ul class="now">
+            <li>Construindo apps mobile com React Native</li>
+            <li>Explorando ferramentas de IA no fluxo de desenvolvimento</li>
+            <li>Aberto a novos projetos e conversas</li>
+          </ul>
         </div>
-        <div class="card span-3 reveal" id="stack">
-          <h3>stack</h3>
+        <div class="card span-6 reveal" id="stack">
+          <h3>Stack</h3>
           <div class="tags">
             <span class="tag hot">React Native</span>
             <span class="tag hot">React</span>
@@ -280,45 +438,55 @@
             <span class="tag">Claude</span>
           </div>
         </div>
-        <div class="card span-3 reveal">
-          <h3>agora</h3>
-          <ul class="now">
-            <li>Construindo apps mobile com React Native</li>
-            <li>Explorando ferramentas de IA no fluxo de desenvolvimento</li>
-            <li>Aberto a novos projetos e conversas</li>
-          </ul>
-        </div>
       </div>
     </section>
 
     <!-- CONTATO -->
     <section class="contact" id="contato">
-      <h2>Vamos construir algo<span style="color:var(--pink)">?</span></h2>
+      <h2>Vamos construir algo<em>?</em></h2>
       <p>Estou sempre aberto a boas conversas sobre produto, mobile e o futuro do desenvolvimento. O jeito mais rápido de me encontrar:</p>
-      <a class="email" href="mailto:padilhamed@gmail.com">padilhamed@gmail.com</a>
+      <div class="contact-cta">
+        <a class="pill primary" href="mailto:padilhamed@gmail.com">padilhamed@gmail.com</a>
+        <a class="pill" href="https://www.linkedin.com/in/lucas-padilha-27503596/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
       <div class="socials">
         <a href="https://github.com/lhadipa" target="_blank" rel="noopener">github</a>
         <a href="https://www.linkedin.com/in/lucas-padilha-27503596/" target="_blank" rel="noopener">linkedin</a>
         <a href="https://lhadipa.com" target="_blank" rel="noopener">lhadipa.com</a>
       </div>
     </section>
-
-    <footer>
-      <span>© 2026 Lucas Padilha</span>
-      <span>feito em São Paulo · <span style="color:var(--pink)">exit 0</span></span>
-    </footer>
-
   </div>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Lucas Padilha</span>
+      <span>feito em São Paulo · <span class="ok">exit 0</span></span>
+    </div>
+  </footer>
 </main>
 
 <script>
+  // tema: claro por padrão, dracula no toggle (persistido)
+  const root = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+  function applyTheme(t){
+    if(t === 'dark'){ root.setAttribute('data-theme','dark'); toggle.textContent = '🌙'; }
+    else{ root.removeAttribute('data-theme'); toggle.textContent = '☀'; }
+  }
+  applyTheme(localStorage.getItem('theme') || 'light');
+  toggle.addEventListener('click', ()=>{
+    const next = root.hasAttribute('data-theme') ? 'light' : 'dark';
+    localStorage.setItem('theme', next);
+    applyTheme(next);
+  });
+
   // terminal digitando `whoami`
   const lines = [
     {html:'<span class="prompt">➜</span> <span class="cmd">whoami --verbose</span>', type:true},
     {html:'<span class="key">name</span>: <span class="str">"Lucas Padilha"</span>'},
     {html:'<span class="key">role</span>: <span class="str">"Software Engineer"</span>'},
     {html:'<span class="key">base</span>: <span class="str">"São Paulo, BR"</span>'},
-    {html:'<span class="key">stack</span>: [<span class="str">"react-native"</span>, <span class="str">"react"</span>, <span class="str">"typescript"</span>]', },
+    {html:'<span class="key">stack</span>: [<span class="str">"react-native"</span>, <span class="str">"react"</span>, <span class="str">"typescript"</span>]'},
     {html:'<span class="key">status</span>: <span class="str">"aberto a novas ideias"</span>'},
     {html:'<span class="dim"># desde 2015 no GitHub · github.com/lhadipa</span>'},
   ];
@@ -337,7 +505,6 @@
     div.className = 'term-line';
     body.appendChild(div);
     if(lines[i].type && !reduced){
-      // digita a primeira linha caractere a caractere
       const plain = 'whoami --verbose';
       let j = 0;
       div.innerHTML = '<span class="prompt">➜</span> <span class="cmd"></span><span class="cursor"></span>';
