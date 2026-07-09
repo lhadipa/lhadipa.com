@@ -151,18 +151,9 @@
   #dust-front{z-index:4}
   #dust-back{z-index:1}
   .cosmos-inner{position:relative;z-index:3}
-  .avatar{
-    width:min(240px,52vw);height:min(240px,52vw);border-radius:50%;
-    margin:0 auto;display:flex;align-items:center;justify-content:center;
-    background:radial-gradient(circle at 38% 32%, #16264d, #0a1430 60%, #060d22);
-    box-shadow:0 0 0 1px rgba(139,183,255,.25), 0 0 90px rgba(59,108,204,.4);
-    font-family:var(--font-display);font-weight:700;
-    font-size:clamp(3.4rem,10vw,5rem);color:#ffb454;letter-spacing:-.03em;
-    text-shadow:0 0 40px rgba(255,180,84,.35);user-select:none;
-  }
   .cosmos .kicker{
     font-family:var(--font-mono);font-size:.74rem;letter-spacing:.5em;
-    text-transform:uppercase;color:#e8b26a;margin:40px 0 8px;text-indent:.5em;
+    text-transform:uppercase;color:#e8b26a;margin:0 0 8px;text-indent:.5em;
   }
   .cosmos h1{
     font-family:var(--font-display);font-weight:600;
@@ -469,7 +460,6 @@
     <canvas id="dust-back" aria-hidden="true"></canvas>
     <canvas id="dust-front" aria-hidden="true"></canvas>
     <div class="cosmos-inner">
-      <div class="avatar" aria-hidden="true">LP</div>
       <p class="kicker">AI Engineer</p>
       <h1>Lucas Padilha</h1>
       <p class="role">Mobile · Web · O que precisar</p>
@@ -664,8 +654,7 @@
     const bctx = back.getContext('2d');
     const fctx = front.getContext('2d');
     const section = back.parentElement;
-    const inner = section.querySelector('.cosmos-inner');
-    const avatar = section.querySelector('.avatar');
+    const focus = section.querySelector('.cosmos h1');
     let W, H, CX, CY, dpr, stars = [], dust = [];
     let mx = 0, my = 0, t = 0;
     const TILT = -0.22;              // inclinação da elipse (rad)
@@ -678,11 +667,11 @@
         c.width = W*dpr; c.height = H*dpr;
         c.getContext('2d').setTransform(dpr,0,0,dpr,0,0);
       });
-      const r = avatar.getBoundingClientRect();
+      const r = focus.getBoundingClientRect();
       const s = section.getBoundingClientRect();
       CX = r.left - s.left + r.width/2;
       CY = r.top - s.top + r.height/2;
-      const R = r.width/2;
+      const R = Math.min(r.width*.30, 200);
       // estrelas fixas de fundo
       stars = Array.from({length:130}, ()=>({
         x:Math.random()*W, y:Math.random()*H,
