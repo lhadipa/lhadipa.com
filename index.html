@@ -387,6 +387,38 @@
   .card.bio p{font-size:1.02rem;max-width:70ch}
   @media (max-width:860px){.card.bio{padding:30px}}
 
+  /* ---------- work (carrossel) ---------- */
+  .work-track{
+    display:flex;gap:18px;overflow-x:auto;
+    scroll-snap-type:x mandatory;scroll-behavior:smooth;
+    padding:4px 4px 20px;
+    scrollbar-width:none;
+  }
+  .work-track::-webkit-scrollbar{display:none}
+  .work-nav{display:flex;justify-content:center;gap:12px;margin-top:8px}
+  .work-btn{
+    width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
+    background:var(--surface);color:var(--text);cursor:pointer;font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .18s,border-color .18s,box-shadow .18s;
+  }
+  .work-btn:hover{transform:translateY(-2px);border-color:var(--accent-text);box-shadow:var(--shadow)}
+  .work-card{
+    flex:0 0 min(340px,82vw);scroll-snap-align:start;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;display:flex;flex-direction:column;gap:14px;
+    transition:transform .2s,box-shadow .2s,border-color .2s;
+  }
+  .work-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--accent-text)}
+  .work-period{
+    font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent-text);font-weight:500;
+  }
+  .work-card h3{font-weight:700;font-size:1.15rem;margin:0}
+  .work-role{display:block;font-size:.85rem;font-weight:500;color:var(--muted);margin-top:3px}
+  .work-card p{color:var(--muted);font-size:.93rem;flex:1}
+  .work-card .tags .tag{font-size:.72rem;padding:6px 12px}
+
   .now li{
     list-style:none;color:var(--muted);font-size:.95rem;
     padding-left:22px;position:relative;margin-bottom:10px;
@@ -445,7 +477,7 @@
     <a class="logo" href="#"><b>lucas</b>@padilha:~$</a>
     <div class="nav-links">
       <a href="#sobre">About</a>
-      <a href="#stack">Work</a>
+      <a href="#work">Work</a>
       <a href="#contato">Contact</a>
     </div>
     <div class="nav-right">
@@ -545,6 +577,102 @@
       </div>
     </section>
 
+    <!-- WORK -->
+    <section id="work">
+      <div class="sec-head">
+        <p class="kicker" data-i18n="work-kicker">trabalho</p>
+        <h2 data-i18n="work-h2">Projetos que marcaram o caminho</h2>
+      </div>
+      <div class="work-track" id="work-track">
+        <article class="work-card reveal">
+          <span class="work-period">Mobile · E-commerce</span>
+          <h3>Thais Rodrigues</h3>
+          <p data-i18n="w-thais-desc">App de e-commerce integrado ao Shopify, do catálogo ao checkout, com back-end próprio em Node.js/NestJS.</p>
+          <div class="tags">
+            <span class="tag">React Native</span>
+            <span class="tag">Shopify</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">NestJS</span>
+          </div>
+        </article>
+        <article class="work-card reveal">
+          <span class="work-period">Mobile · Alertas</span>
+          <h3>Elven Works</h3>
+          <p data-i18n="w-elven-desc">App de alertas de incidentes. O desafio: garantir que notificações críticas chegassem mesmo com o "Não Perturbe" ativado.</p>
+          <div class="tags">
+            <span class="tag">React Native</span>
+            <span class="tag">Expo</span>
+            <span class="tag">Push Notifications</span>
+          </div>
+        </article>
+        <article class="work-card reveal">
+          <span class="work-period">Mobile · Saúde</span>
+          <h3>Medway</h3>
+          <p data-i18n="w-medway-desc">Doc to Doc — app que conecta médicos, com mobile em React Native/Expo e back-end em Python com Flask.</p>
+          <div class="tags">
+            <span class="tag">React Native</span>
+            <span class="tag">Expo</span>
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
+          </div>
+        </article>
+        <article class="work-card reveal">
+          <span class="work-period">Web · Dashboard</span>
+          <h3>Allos</h3>
+          <p data-i18n="w-allos-desc">Aplicação web de dashboard em Next.js, com BFF em NestJS/Node para consolidar os dados de negócio.</p>
+          <div class="tags">
+            <span class="tag">Next.js</span>
+            <span class="tag">NestJS</span>
+            <span class="tag">Node.js</span>
+          </div>
+        </article>
+        <article class="work-card reveal">
+          <span class="work-period">Mobile · Telecom</span>
+          <h3>Claro</h3>
+          <p data-i18n="w-claro-desc">App em React Native com BFF em Node.js/Express e DynamoDB na AWS — escala de operadora nacional.</p>
+          <div class="tags">
+            <span class="tag">React Native</span>
+            <span class="tag">Express</span>
+            <span class="tag">DynamoDB</span>
+          </div>
+        </article>
+        <article class="work-card reveal">
+          <span class="work-period">Web · Fintech</span>
+          <h3>Provi</h3>
+          <p data-i18n="w-provi-desc">Plataforma web em React + Vite, back-end em Node.js/Express com serviços em Python e PostgreSQL.</p>
+          <div class="tags">
+            <span class="tag">React</span>
+            <span class="tag">Vite</span>
+            <span class="tag">Python</span>
+            <span class="tag">PostgreSQL</span>
+          </div>
+        </article>
+        <article class="work-card reveal">
+          <span class="work-period">Mobile · Mobilidade</span>
+          <h3>Veloe</h3>
+          <p data-i18n="w-veloe-desc">App em React Native com back-end/BFF em Java e Node.js — e a esteira de CI/CD mobile construída à mão com Fastlane.</p>
+          <div class="tags">
+            <span class="tag">React Native</span>
+            <span class="tag">Java</span>
+            <span class="tag">Fastlane</span>
+          </div>
+        </article>
+        <article class="work-card reveal">
+          <span class="work-period">Mobile · Notícias</span>
+          <h3>Citus Systems</h3>
+          <p data-i18n="w-citus-desc">App de feed de notícias construído nos primórdios do React Native — quando quase não havia biblioteca pronta.</p>
+          <div class="tags">
+            <span class="tag">React Native</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </article>
+      </div>
+      <div class="work-nav">
+        <button class="work-btn" id="work-prev" aria-label="Projeto anterior">←</button>
+        <button class="work-btn" id="work-next" aria-label="Próximo projeto">→</button>
+      </div>
+    </section>
+
     <!-- CONTATO -->
     <section class="contact" id="contato">
       <h2 data-i18n-html="contact-h2">Vamos construir algo<em>?</em></h2>
@@ -607,6 +735,16 @@
       'now-3':'Aberto a qualquer desafio que envolva código',
       'contact-h2':'Vamos construir algo<em>?</em>',
       'contact-p':'Estou sempre aberto a boas conversas sobre produto, mobile e o futuro do desenvolvimento. O jeito mais rápido de me encontrar:',
+      'work-kicker':'trabalho',
+      'work-h2':'Projetos que marcaram o caminho',
+      'w-thais-desc':'App de e-commerce integrado ao Shopify, do catálogo ao checkout, com back-end próprio em Node.js/NestJS.',
+      'w-elven-desc':'App de alertas de incidentes. O desafio: garantir que notificações críticas chegassem mesmo com o "Não Perturbe" ativado.',
+      'w-medway-desc':'Doc to Doc — app que conecta médicos, com mobile em React Native/Expo e back-end em Python com Flask.',
+      'w-allos-desc':'Aplicação web de dashboard em Next.js, com BFF em NestJS/Node para consolidar os dados de negócio.',
+      'w-claro-desc':'App em React Native com BFF em Node.js/Express e DynamoDB na AWS — escala de operadora nacional.',
+      'w-provi-desc':'Plataforma web em React + Vite, back-end em Node.js/Express com serviços em Python e PostgreSQL.',
+      'w-veloe-desc':'App em React Native com back-end/BFF em Java e Node.js — e a esteira de CI/CD mobile construída à mão com Fastlane.',
+      'w-citus-desc':'App de feed de notícias construído nos primórdios do React Native — quando quase não havia biblioteca pronta.',
       'footer-made':'feito em São Paulo',
       'term-status':'aberto a novas ideias',
       'term-dim':'# desde 2015 no GitHub · github.com/lhadipa'
@@ -631,6 +769,16 @@
       'now-3':'Open to any challenge that involves code',
       'contact-h2':"Let's build something<em>?</em>",
       'contact-p':"I'm always up for good conversations about product, mobile and the future of software. The fastest way to reach me:",
+      'work-kicker':'work',
+      'work-h2':'Projects that shaped the journey',
+      'w-thais-desc':'E-commerce app integrated with Shopify, from catalog to checkout, with its own Node.js/NestJS backend.',
+      'w-elven-desc':'Incident-alert app. The challenge: making sure critical notifications got through even with Do Not Disturb enabled.',
+      'w-medway-desc':'Doc to Doc — an app connecting physicians, with React Native/Expo on mobile and a Python/Flask backend.',
+      'w-allos-desc':'Web dashboard application in Next.js, with a NestJS/Node BFF consolidating business data.',
+      'w-claro-desc':'React Native app with a Node.js/Express BFF and DynamoDB on AWS — at national carrier scale.',
+      'w-provi-desc':'Web platform in React + Vite, backend fully in Node.js/Express with Python services and PostgreSQL.',
+      'w-veloe-desc':'React Native app with a Java + Node.js backend/BFF — and the mobile CI/CD pipeline built by hand with Fastlane.',
+      'w-citus-desc':'News-feed app built in the early days of React Native — when almost no ready-made libraries existed.',
       'footer-made':'made in São Paulo',
       'term-status':'open to new ideas',
       'term-dim':'# on GitHub since 2015 · github.com/lhadipa'
@@ -825,6 +973,15 @@
         ctx.fillRect(x,y,p.s,p.s);
       }
     }
+  })();
+
+  // carrossel de projetos
+  (function(){
+    const track = document.getElementById('work-track');
+    if(!track) return;
+    const step = ()=> (track.querySelector('.work-card')?.offsetWidth || 340) + 18;
+    document.getElementById('work-prev').addEventListener('click', ()=>track.scrollBy({left:-step()}));
+    document.getElementById('work-next').addEventListener('click', ()=>track.scrollBy({left:step()}));
   })();
 
   // reveal on scroll
