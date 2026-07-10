@@ -382,6 +382,11 @@
     background:color-mix(in srgb, var(--accent) 10%, transparent);
   }
 
+  /* ---------- bio ---------- */
+  .card.bio{padding:44px}
+  .card.bio p{font-size:1.02rem;max-width:70ch}
+  @media (max-width:860px){.card.bio{padding:30px}}
+
   .now li{
     list-style:none;color:var(--muted);font-size:.95rem;
     padding-left:22px;position:relative;margin-bottom:10px;
@@ -505,10 +510,11 @@
         <h2 data-i18n="about-h2">Produto primeiro, código depois</h2>
       </div>
       <div class="cards">
-        <div class="card span-3 reveal">
+        <div class="card bio span-6 reveal">
           <h3 data-i18n="who-h3">Quem sou</h3>
-          <p data-i18n-html="who-p1">Engenheiro de software apaixonado por produto. Hoje meu foco é <strong>AI Engineering</strong> — LLMs, agentes e automação — somado a uma base sólida em <strong>mobile e web</strong>: React Native, React e TypeScript em produção.</p>
-          <p data-i18n="who-p2">Mas não me prendo a rótulo: backend, infra, integração, protótipo — entendo o problema primeiro e construo o que ele pedir, com o mínimo de código que resolve bem.</p>
+          <p data-i18n-html="who-p1">Sou Lucas Padilha — engenheiro de software nascido e criado em <strong>São Paulo</strong>, onde vivo hoje. Há mais de uma década transformo ideias em produto no ecossistema JavaScript, a maior parte delas em apps mobile que chegaram de verdade às lojas.</p>
+          <p data-i18n-html="who-p2">Hoje trabalho na <strong>Kiddo</strong>, e meu tempo se divide entre construir com <strong>React Native</strong> e explorar o que dá para criar com <strong>LLMs e agentes de IA</strong> — que viraram parte central do meu jeito de trabalhar, não só uma ferramenta de apoio.</p>
+          <p data-i18n="who-p3">Fora do código, gosto de estrada, café e de ver o sol se pôr longe da cidade. Entendo o problema antes de escrever qualquer linha — e escrevo o mínimo que resolve bem.</p>
         </div>
         <div class="card span-3 reveal">
           <h3 data-i18n="now-h3">Agora</h3>
@@ -518,7 +524,7 @@
             <li data-i18n="now-3">Aberto a qualquer desafio que envolva código</li>
           </ul>
         </div>
-        <div class="card span-6 reveal" id="stack">
+        <div class="card span-3 reveal" id="stack">
           <h3>Stack</h3>
           <div class="tags">
             <span class="tag hot">LLMs &amp; Agentes</span>
@@ -592,8 +598,9 @@
       'about-kicker':'sobre',
       'about-h2':'Produto primeiro, código depois',
       'who-h3':'Quem sou',
-      'who-p1':'Engenheiro de software apaixonado por produto. Hoje meu foco é <strong>AI Engineering</strong> — LLMs, agentes e automação — somado a uma base sólida em <strong>mobile e web</strong>: React Native, React e TypeScript em produção.',
-      'who-p2':'Mas não me prendo a rótulo: backend, infra, integração, protótipo — entendo o problema primeiro e construo o que ele pedir, com o mínimo de código que resolve bem.',
+      'who-p1':'Sou Lucas Padilha — engenheiro de software nascido e criado em <strong>São Paulo</strong>, onde vivo hoje. Há mais de uma década transformo ideias em produto no ecossistema JavaScript, a maior parte delas em apps mobile que chegaram de verdade às lojas.',
+      'who-p2':'Hoje trabalho na <strong>Kiddo</strong>, e meu tempo se divide entre construir com <strong>React Native</strong> e explorar o que dá para criar com <strong>LLMs e agentes de IA</strong> — que viraram parte central do meu jeito de trabalhar, não só uma ferramenta de apoio.',
+      'who-p3':'Fora do código, gosto de estrada, café e de ver o sol se pôr longe da cidade. Entendo o problema antes de escrever qualquer linha — e escrevo o mínimo que resolve bem.',
       'now-h3':'Agora',
       'now-1':'Construindo produtos com LLMs e agentes de IA',
       'now-2':'Apps mobile com React Native, do protótipo à loja',
@@ -615,8 +622,9 @@
       'about-kicker':'about',
       'about-h2':'Product first, code second',
       'who-h3':'Who I am',
-      'who-p1':'Software engineer with a passion for product. My focus today is <strong>AI Engineering</strong> — LLMs, agents and automation — on top of a solid <strong>mobile and web</strong> foundation: React Native, React and TypeScript in production.',
-      'who-p2':"I don't stick to labels though: backend, infra, integrations, prototypes — I understand the problem first and build whatever it calls for, with the least code that solves it well.",
+      'who-p1':"I'm Lucas Padilha — a software engineer born and raised in <strong>São Paulo</strong>, where I live today. For over a decade I've been turning ideas into product in the JavaScript ecosystem, most of them mobile apps that actually shipped to the stores.",
+      'who-p2':"I currently work at <strong>Kiddo</strong>, and my time is split between building with <strong>React Native</strong> and exploring what can be created with <strong>LLMs and AI agents</strong> — which became a core part of how I work, not just a helper tool.",
+      'who-p3':"Outside of code, I enjoy road trips, coffee and watching the sun set far from the city. I understand the problem before writing a single line — and write the least code that solves it well.",
       'now-h3':'Now',
       'now-1':'Building products with LLMs and AI agents',
       'now-2':'Mobile apps with React Native, from prototype to store',
