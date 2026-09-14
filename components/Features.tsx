@@ -15,6 +15,12 @@ export default function Features() {
       <span className="feature">
         <span className="ic">⌨</span> <span>{t('feat-web')}</span>
       </span>
+      <span className="feature">
+        <span className="ic">⌕</span> <span>{t('feat-seo')}</span>
+      </span>
+      <span className="feature">
+        <span className="ic">⚙</span> <span>{t('feat-auto')}</span>
+      </span>
     </div>
   );
 }

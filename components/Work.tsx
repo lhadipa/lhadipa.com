@@ -12,6 +12,8 @@ type Project = {
 
 // do mais novo para o mais velho
 const PROJECTS: Project[] = [
+  { label: 'Web · Governança', name: 'IBGC — ibgc.org.br', descKey: 'w-ibgc-desc', tags: ['SEO', 'GEO', 'Busca com IA', 'Strapi'] },
+  { label: 'CMS · Headless', name: 'IBGC — CMS', descKey: 'w-ibgc-cms-desc', tags: ['Strapi', 'Node.js', 'API', 'Documentação'] },
   { label: 'Mobile · E-commerce', name: 'Thais Rodrigues', descKey: 'w-thais-desc', tags: ['React Native', 'Shopify', 'Node.js', 'NestJS'] },
   { label: 'Mobile · Alertas', name: 'Elven Works', descKey: 'w-elven-desc', tags: ['React Native', 'Expo', 'Push Notifications'] },
   { label: 'Mobile · Saúde', name: 'Medway', descKey: 'w-medway-desc', tags: ['React Native', 'Expo', 'Python', 'Flask'] },

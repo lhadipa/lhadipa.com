@@ -3,7 +3,7 @@
 import { useApp } from '@/lib/i18n';
 
 const STACK_HOT = ['LLMs & Agentes', 'Claude', 'React Native', 'React', 'TypeScript'];
-const STACK = ['JavaScript', 'Node.js', 'NestJS', 'Jest', 'Swift', 'SwiftUI', 'Kotlin'];
+const STACK = ['SEO/GEO', 'n8n', 'Strapi', 'JavaScript', 'Node.js', 'NestJS', 'Jest', 'Swift', 'SwiftUI', 'Kotlin'];
 
 export default function About() {
   const { t } = useApp();
@@ -26,6 +26,8 @@ export default function About() {
             <li>{t('now-1')}</li>
             <li>{t('now-2')}</li>
             <li>{t('now-3')}</li>
+            <li>{t('now-4')}</li>
+            <li>{t('now-5')}</li>
           </ul>
         </div>
         <div className="card span-3 reveal" id="stack">
