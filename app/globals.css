@@ -80,7 +80,7 @@
 
   /* ---------- hero cósmico ---------- */
   .cosmos{
-    position:relative;min-height:100vh;overflow:hidden;
+    position:relative;min-height:100vh;min-height:100svh;overflow:hidden;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;color:#eef2ff;
     background:
@@ -182,6 +182,7 @@
     transition:transform .18s,border-color .18s;
   }
   .theme-toggle:hover{transform:rotate(15deg);border-color:var(--accent)}
+  .nav-cta{padding:10px 22px}
   @media (max-width:700px){.nav-links{display:none}}
 
   /* ---------- pílulas ---------- */
@@ -410,3 +411,19 @@
     .span-3,.span-6{grid-column:span 1}
     .stats-row{gap:40px;padding:48px 0}
   }
+
+  /* ---------- celular ---------- */
+  @media (max-width:520px){
+    .wrap{padding:0 16px}
+    .navbar .bar{padding:6px 6px 6px 16px}
+    .logo{font-size:.8rem}
+    .nav-right{gap:6px}
+    .theme-toggle{width:36px;height:36px}
+    .nav-cta{padding:9px 16px;font-size:.85rem}
+    .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .stat b{font-size:2.2rem}
+    .stat span{display:block;font-size:.8rem;line-height:1.35;margin-top:4px}
+    .card,.card.bio{padding:24px}
+    .sun{opacity:.7}
+  }
+  @media (max-width:380px){.nav-cta{display:none}}

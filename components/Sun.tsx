@@ -9,13 +9,15 @@ export default function Sun() {
   useEffect(() => {
     const sun = ref.current;
     if (!sun) return;
-    let tx = window.innerWidth * 0.82;
-    let ty = window.innerHeight * 0.28;
+    // em telas de toque não há mouse: sol menor, fixo no canto e sem seguir o dedo
+    const touch = window.matchMedia('(hover: none)').matches;
+    let tx = window.innerWidth * (touch ? 0.9 : 0.82);
+    let ty = window.innerHeight * (touch ? 0.16 : 0.28);
     let x = tx;
     let y = ty;
-    sun.style.transform = `translate(${x}px, ${y}px)`;
+    sun.style.transform = `translate(${x}px, ${y}px)${touch ? ' scale(.55)' : ''}`;
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (touch || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const onMove = (e: PointerEvent) => {
       tx = e.clientX;

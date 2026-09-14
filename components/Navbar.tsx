@@ -23,7 +23,7 @@ export default function Navbar() {
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Alternar tema claro/escuro">
             {theme === 'light' ? '☀' : '🌙'}
           </button>
-          <a className="pill primary" style={{ padding: '10px 22px' }} href="#contato">
+          <a className="pill primary nav-cta" href="#contato">
             {t('cta-talk')}
           </a>
         </div>
