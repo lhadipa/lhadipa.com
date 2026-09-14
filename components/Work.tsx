@@ -14,6 +14,8 @@ type Project = {
 const PROJECTS: Project[] = [
   { label: 'Web · Governança', name: 'IBGC — ibgc.org.br', descKey: 'w-ibgc-desc', tags: ['SEO', 'GEO', 'Busca com IA', 'Strapi'] },
   { label: 'CMS · Headless', name: 'IBGC — CMS', descKey: 'w-ibgc-cms-desc', tags: ['Strapi', 'Node.js', 'API', 'Documentação'] },
+  { label: 'Fintech · Automação', name: 'Fintech (confidencial)', descKey: 'w-auto-fin-desc', tags: ['n8n', 'LLMs', 'Agent harness', 'Webhooks'] },
+  { label: 'Varejo · Automação', name: 'Varejo (confidencial)', descKey: 'w-auto-retail-desc', tags: ['n8n', 'Claude', 'APIs', 'Documentação'] },
   { label: 'Mobile · E-commerce', name: 'Thais Rodrigues', descKey: 'w-thais-desc', tags: ['React Native', 'Shopify', 'Node.js', 'NestJS'] },
   { label: 'Mobile · Alertas', name: 'Elven Works', descKey: 'w-elven-desc', tags: ['React Native', 'Expo', 'Push Notifications'] },
   { label: 'Mobile · Saúde', name: 'Medway', descKey: 'w-medway-desc', tags: ['React Native', 'Expo', 'Python', 'Flask'] },
